@@ -36,12 +36,12 @@ return args-> {
 		accountService.addRole(new AppRole(null, "client"));
 		accountService.addRole(new AppRole(null, "artisant"));
 
-		accountService.addUser(new AppUser(null,"latifa","lhafidi","latifa","latifa123","latifa4smi@gmail.com", new ArrayList<>()));
-		accountService.addUser(new AppUser(null,"aicha","ait mouh","habiba","aicha123","latifa4smi@gmail.com", new ArrayList<>()));
-		accountService.addUser(new AppUser(null,"tasnime","lhafudi","tasnim ","tasnime123","latifa4smi@gmail.com", new ArrayList<>()));
+	 accountService.addUser(new AppUser(null,"latifa","latifa123", new ArrayList<>()));
+	 accountService.addUser(new AppUser(null,"tasnime","123456", new ArrayList<>()));
+	 accountService.addUser(new AppUser(null,"Ahmed","ahmed2022", new ArrayList<>()));
 
-		accountService.addRoleToUser("tasnim", "client");
-		accountService.addRoleToUser("habiba","admin");
+		accountService.addRoleToUser("tasnime", "client");
+		accountService.addRoleToUser("Ahmed","admin");
 		accountService.addRoleToUser("latifa","artisant");
 
 

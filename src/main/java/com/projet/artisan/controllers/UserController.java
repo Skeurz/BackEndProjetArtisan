@@ -16,17 +16,18 @@ public class UserController {
 
     private AccountService accountService;
 
-    public UserController (AccountService accountService) {
+    public UserController(AccountService accountService) {
         this.accountService = accountService;
     }
-     @GetMapping(path="/users")
-    // @PostAuthorize("hasAuthority('admin')")
+    @GetMapping(path="/users")
+    @PostAuthorize("hasAuthority('user')")
+
     public List<AppUser> getAllUsers(){
         return accountService.listeUsers();
     }
     @PostMapping(path="/user")
+    // @PostAuthorize("hasAuthority('admin')")
     public AppUser ajouterUser ( @RequestBody AppUser user){
-
         return accountService.addUser(user);
     }
     @PostMapping(path="/roles")
@@ -39,7 +40,7 @@ public class UserController {
     }
 }
 @Data
-class RoleForm {
+class RoleForm{
     private String userName;
     private String roleName;
 
