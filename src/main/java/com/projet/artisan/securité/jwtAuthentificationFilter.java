@@ -1,4 +1,4 @@
-package com.projet.artisan.securité;
+package com.gestion.Etudiants.securité;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;

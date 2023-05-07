@@ -1,7 +1,7 @@
-package com.projet.artisan.securité;
+package com.gestion.Etudiants.securité;
 
-import com.projet.artisan.models.AppUser;
-import com.projet.artisan.services.AccountService;
+import com.gestion.Etudiants.model.AppUser;
+import com.gestion.Etudiants.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -49,7 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.headers().frameOptions().disable();
        // http.formLogin();
-        http.authorizeHttpRequests().anyRequest().authenticated();
+        http.authorizeHttpRequests().anyRequest().permitAll();
         http.addFilter(new jwtAuthentificationFilter(authenticationManagerBean()));
         http.addFilterBefore(new jwtAuthorisationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
