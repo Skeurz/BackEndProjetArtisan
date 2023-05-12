@@ -16,8 +16,8 @@ import java.io.Serializable;
 public class AppRole implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_user", nullable = false)
-    private Long idUser;
+    @Column(name = "id_role", nullable = false)
+    private Long idRole;
     private String role;
 
 

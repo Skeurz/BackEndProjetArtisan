@@ -12,10 +12,18 @@ import java.util.Collection;
 @Entity
 @Data
 
+@AllArgsConstructor
+@NoArgsConstructor
 public class AppUser implements Serializable {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY )
     private Long id;
+    private String nom;
+    private String prenom;
+    private String email;
+
+    @Column(nullable = false, unique = true)
+
 
     private String userName;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
@@ -23,16 +31,10 @@ public class AppUser implements Serializable {
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<AppRole> appRoles =new ArrayList<>();
 
-    public AppUser() {
-    }
 
 
-    public AppUser(Long id, String userName, String password,Collection<AppRole> appRoles) {
-        this.id = id;
-        this.userName = userName;
-        this.password=password;
-        this.appRoles = appRoles;
-    }
+
+
 
 
 }

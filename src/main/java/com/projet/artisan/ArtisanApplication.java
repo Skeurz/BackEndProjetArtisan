@@ -32,17 +32,15 @@ public class ArtisanApplication {
 	CommandLineRunner start (AccountService accountService){
 
 return args-> {
-		//accountService.addRole(new AppRole(null, "admin"));
+		accountService.addRole(new AppRole(null, "admin"));
 		accountService.addRole(new AppRole(null, "client"));
-		accountService.addRole(new AppRole(null, "artisant"));
+		//²accountService.addRole(new AppRole(null, "artisant"));
 
-	 accountService.addUser(new AppUser(null,"latifa","latifa123", new ArrayList<>()));
-	 accountService.addUser(new AppUser(null,"tasnime","123456", new ArrayList<>()));
-	 accountService.addUser(new AppUser(null,"Ahmed","ahmed2022", new ArrayList<>()));
+	   accountService.addUser(new AppUser(null,"latifa","latifa","lhafidi@gmail.com","latifa","latifa123", new ArrayList<>()));
+	    accountService.addUser(new AppUser(null,"soufiane","lhafidi","mahzinho59@gmail.com","soufiane","ahmed2022", new ArrayList<>()));
 
-		accountService.addRoleToUser("tasnime", "client");
-		accountService.addRoleToUser("Ahmed","admin");
-		accountService.addRoleToUser("latifa","artisant");
+		accountService.addRoleToUser("latifa", "admin");
+		accountService.addRoleToUser("soufiane","client");
 
 
 

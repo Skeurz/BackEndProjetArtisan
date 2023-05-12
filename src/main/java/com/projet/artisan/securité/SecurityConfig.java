@@ -1,7 +1,7 @@
-package com.gestion.Etudiants.securité;
+package com.projet.artisan.securité;
 
-import com.gestion.Etudiants.model.AppUser;
-import com.gestion.Etudiants.service.AccountService;
+import com.projet.artisan.models.AppUser;
+import com.projet.artisan.services.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

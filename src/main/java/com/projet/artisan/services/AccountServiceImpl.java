@@ -4,6 +4,7 @@ import com.projet.artisan.models.AppRole;
 import com.projet.artisan.models.AppUser;
 import com.projet.artisan.repository.AppRoleRepository;
 import com.projet.artisan.repository.AppUserRepository;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -18,10 +19,12 @@ public class AccountServiceImpl implements AccountService {
     private PasswordEncoder passwordEncoder;
 
 
+
     public AccountServiceImpl(AppUserRepository appUserRepository, AppRoleRepository appRoleRepository, PasswordEncoder passwordEncoder) {
         this.appUserRepository = appUserRepository;
         this.appRoleRepository=appRoleRepository;
         this.passwordEncoder = passwordEncoder;
+
     }
 
 
@@ -29,9 +32,15 @@ public class AccountServiceImpl implements AccountService {
     public AppUser addUser(AppUser user) {
         String pw= user.getPassword();
         user.setPassword(passwordEncoder.encode(pw));
-
         return appUserRepository.save(user);
     }
+
+    @Override
+    public AppUser getUser(Long id) {
+        return appUserRepository.findById(id).get();
+    }
+
+
     @Override
     public void addRoleToUser(String userName, String roleName) {
         AppUser user= appUserRepository.findByUserName(userName);
