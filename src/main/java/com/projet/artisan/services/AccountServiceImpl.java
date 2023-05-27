@@ -4,7 +4,7 @@ import com.projet.artisan.models.AppRole;
 import com.projet.artisan.models.AppUser;
 import com.projet.artisan.repository.AppRoleRepository;
 import com.projet.artisan.repository.AppUserRepository;
-import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -15,18 +15,26 @@ import java.util.List;
 
 public class AccountServiceImpl implements AccountService {
     private AppRoleRepository appRoleRepository;
+
+    @Autowired
     private AppUserRepository appUserRepository;
     private PasswordEncoder passwordEncoder;
 
 
 
+
+
     public AccountServiceImpl(AppUserRepository appUserRepository, AppRoleRepository appRoleRepository, PasswordEncoder passwordEncoder) {
         this.appUserRepository = appUserRepository;
-        this.appRoleRepository=appRoleRepository;
+        this.appRoleRepository= appRoleRepository;
         this.passwordEncoder = passwordEncoder;
 
     }
 
+    @Override
+    public void deleteUser(Long id) {
+        appUserRepository.deleteById(id);
+    }
 
     @Override
     public AppUser addUser(AppUser user) {
@@ -39,6 +47,7 @@ public class AccountServiceImpl implements AccountService {
     public AppUser getUser(Long id) {
         return appUserRepository.findById(id).get();
     }
+
 
 
     @Override

@@ -6,6 +6,10 @@ import com.projet.artisan.models.AppUser;
 import java.util.List;
 
 public interface AccountService {
+    default void deleteUser(Long id) {
+    }
+    //static AppUser deleteUser(int id);
+
     AppUser addUser(AppUser user);
     AppUser getUser(Long id);
 
@@ -13,5 +17,10 @@ public interface AccountService {
 
     List<AppUser> listeUsers();
     AppUser loadUserByUserName(String userName);
-    void addRoleToUser(String userName,String role);
+
+ //   AppUser delete(Long id);
+
+    void addRoleToUser(String userName, String role);
+
+
 }

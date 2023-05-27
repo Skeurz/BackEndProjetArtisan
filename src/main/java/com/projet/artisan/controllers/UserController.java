@@ -2,36 +2,55 @@ package com.projet.artisan.controllers;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.projet.artisan.ArtisanApplication;
 import com.projet.artisan.models.AppRole;
 import com.projet.artisan.models.AppUser;
+import com.projet.artisan.repository.AppUserRepository;
 import com.projet.artisan.services.AccountService;
 import lombok.Data;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.HttpStatus;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@CrossOrigin("*")
+@CrossOrigin(origins="http://localhost:4200")
 @RestController
 
 public class UserController {
 
     private AccountService accountService;
+    private final AppUserRepository appUserRepository;
     private  final AuthenticationManager authenticationManager;
 
-    public UserController(AccountService accountService, AuthenticationManager authenticationManager) {
+    public UserController(AccountService accountService, AuthenticationManager authenticationManager, AppUserRepository appUserRepository) {
         this.accountService = accountService;
         this.authenticationManager = authenticationManager;
+        this.appUserRepository = appUserRepository;
     }
+
     @GetMapping(path="/users")
    // @PostAuthorize("hasAuthority('user')")
     public List<AppUser> getAllUsers(){
         return accountService.listeUsers();
+    }
+
+
+    /*@DeleteMapping("delete/{id}")
+    public ResponseEntity<String> delete(@PathVariable("id") Long id) {
+        AccountService.delete(id);
+        return new ResponseEntity<String>("User is deleted successfully.!", HttpStatus.OK);
+    }*/
+
+    @DeleteMapping("delete/{id}")
+    public ResponseEntity<?> deleteUser(@PathVariable Long id) {
+        accountService.deleteUser(id);
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/authenticate")
@@ -75,18 +94,28 @@ public class UserController {
     @GetMapping (path="/profil/{id}")    public AppUser getUserById( @PathVariable Long id){
         return accountService.getUser(id);
     }
+    private AppUserRepository repo;
     @PostMapping(path="/register")
-    public AppUser ajouterUser ( @RequestBody AppUser user){
-        return accountService.addUser(user);
+    public AppUser appUser ( @RequestBody AppUser user){
+       return accountService.addUser(user);
+        //  return ResponseEntity.ok(repo.save(user));
     }
     @PostMapping(path="/roles")
-    public AppRole ajouterRole ( @RequestBody AppRole role){
+    public AppRole appRole ( @RequestBody AppRole role){
         return accountService.addRole(role);
     }
     @PostMapping(path="/addRoleToUser")
     public void addRoleToUser( @RequestBody RoleForm roleForm){
         accountService.addRoleToUser(roleForm.getUserName(),roleForm.getRoleName());
     }
+
+
+
+   /* @DeleteMapping (path="/delete/{id}")
+    public String deleteUser(@PathVariable("id") long id) {
+         AccountService.deleteUser((int) id);
+        return "User Deleted Successfully";
+    }*/
 }
 @Data
 class RoleForm{

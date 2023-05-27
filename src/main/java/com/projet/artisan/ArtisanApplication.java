@@ -18,17 +18,24 @@ import java.util.ArrayList;
 @SpringBootApplication
 @EnableGlobalMethodSecurity(prePostEnabled = true,securedEnabled = true)
 
+
 public class ArtisanApplication {
 
 	public static void main(String[] args) {
 		ApplicationContext ctx = SpringApplication.run( ArtisanApplication.class, args);
 
 	}
+
+	public static void deleteUser(long id) {
+
+	}
+
+
 	@Bean
 	PasswordEncoder passwordEncoder (){
 		return new BCryptPasswordEncoder();
 	}
-	@Bean
+	/*@Bean
 	CommandLineRunner start (AccountService accountService){
 
 return args-> {
@@ -36,16 +43,20 @@ return args-> {
 		accountService.addRole(new AppRole(null, "client"));
 		//²accountService.addRole(new AppRole(null, "artisant"));
 
-	   accountService.addUser(new AppUser(null,"latifa","latifa","lhafidi@gmail.com","latifa","latifa123", new ArrayList<>()));
-	    accountService.addUser(new AppUser(null,"soufiane","lhafidi","mahzinho59@gmail.com","soufiane","ahmed2022", new ArrayList<>()));
+	    accountService.addUser(new AppUser(null,"latifa","latifa","latifa","lhafidi@gmail.com","latifa123", new ArrayList<>()));
+	   accountService.addUser(new AppUser(null,"soufiane","lhafidi","soufiane","mahzinho59@gmail.com","ahmed2022", new ArrayList<>()));
+	    accountService.addUser(new AppUser(null,"zahou","anas","anas","anas@gmail.com","123", new ArrayList<>()));
+	   accountService.addUser(new AppUser(null,"Elkhoudri","fadoua","fadoua","fadoua@gmail.com","123", new ArrayList<>()));
 
 		accountService.addRoleToUser("latifa", "admin");
+	    accountService.addRoleToUser("anas", "admin");
 		accountService.addRoleToUser("soufiane","client");
+	    accountService.addRoleToUser("fadoua", "admin");
 
 
 
 };
-	}
+	}*/
 }
 
 
