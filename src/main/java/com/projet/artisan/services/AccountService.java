@@ -2,6 +2,7 @@ package com.projet.artisan.services;
 
 import com.projet.artisan.models.AppRole;
 import com.projet.artisan.models.AppUser;
+import com.projet.artisan.repository.AppUserRepository;
 
 import java.util.List;
 
@@ -12,6 +13,13 @@ public interface AccountService {
 
     AppUser addUser(AppUser user);
     AppUser getUser(Long id);
+
+    public AppUser updateUser(AppUser user);
+
+    AppUser getUserById(Long id);
+
+    AppUser saveUser(AppUser user);
+
 
     AppRole addRole(AppRole role);
 

@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 @CrossOrigin(origins="http://localhost:4200")
+
 @RestController
 
 public class UserController {
@@ -34,6 +35,8 @@ public class UserController {
         this.appUserRepository = appUserRepository;
     }
 
+
+
     @GetMapping(path="/users")
    // @PostAuthorize("hasAuthority('user')")
     public List<AppUser> getAllUsers(){
@@ -41,11 +44,9 @@ public class UserController {
     }
 
 
-    /*@DeleteMapping("delete/{id}")
-    public ResponseEntity<String> delete(@PathVariable("id") Long id) {
-        AccountService.delete(id);
-        return new ResponseEntity<String>("User is deleted successfully.!", HttpStatus.OK);
-    }*/
+
+
+
     @DeleteMapping("delete/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable Long id) {
         accountService.deleteUser(id);
@@ -93,6 +94,29 @@ public class UserController {
     @GetMapping (path="/profil/{id}")    public AppUser getUserById( @PathVariable Long id){
         return accountService.getUser(id);
     }
+
+
+    @PutMapping("edit/{id}")
+    public ResponseEntity<AppUser> updateUser(@PathVariable Long id, @RequestBody AppUser updatedUser) {
+        AppUser user = accountService.getUserById(id);
+        if (user == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        user.setNom(updatedUser.getNom());
+        user.setPrenom(updatedUser.getPrenom());
+        user.setUserName(updatedUser.getUserName());
+        user.setEmail(updatedUser.getEmail());
+        user.setPassword(updatedUser.getPassword());
+
+        AppUser updatedAppUser = accountService.updateUser(user);
+        return ResponseEntity.ok(updatedAppUser);
+    }
+
+
+
+
+
     private AppUserRepository repo;
     @PostMapping(path="/register")
     public AppUser appUser ( @RequestBody AppUser user){

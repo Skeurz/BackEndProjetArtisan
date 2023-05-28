@@ -43,9 +43,23 @@ public class AccountServiceImpl implements AccountService {
         return appUserRepository.save(user);
     }
 
+    public AppUser saveUser(AppUser user) {
+        return appUserRepository.save(user);
+    }
+
+    @Override
+    public AppUser updateUser(AppUser user) {
+        return appUserRepository.save(user);
+    }
+
     @Override
     public AppUser getUser(Long id) {
         return appUserRepository.findById(id).get();
+    }
+
+    @Override
+    public AppUser getUserById(Long id) {
+        return appUserRepository.findById(id).orElse(null);
     }
 
 

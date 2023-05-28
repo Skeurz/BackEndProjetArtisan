@@ -37,10 +37,10 @@ public class AppUser implements Serializable {
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<AppRole> appRoles =new ArrayList<>();
 
- /*   @CreationTimestamp
+    @CreationTimestamp
     @Column(updatable = false)
     Timestamp dateCreated;
     @UpdateTimestamp
-    Timestamp lastModified;*/
+    Timestamp lastModified;
 
 }
