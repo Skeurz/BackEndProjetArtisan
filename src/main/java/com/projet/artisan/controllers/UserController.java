@@ -5,8 +5,11 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.projet.artisan.ArtisanApplication;
 import com.projet.artisan.models.AppRole;
 import com.projet.artisan.models.AppUser;
+import com.projet.artisan.models.Post;
 import com.projet.artisan.repository.AppUserRepository;
+import com.projet.artisan.repository.PostRepository;
 import com.projet.artisan.services.AccountService;
+import com.projet.artisan.services.ArtisanService;
 import lombok.Data;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -29,10 +32,13 @@ public class UserController {
     private final AppUserRepository appUserRepository;
     private  final AuthenticationManager authenticationManager;
 
-    public UserController(AccountService accountService, AuthenticationManager authenticationManager, AppUserRepository appUserRepository) {
+
+    public UserController(AccountService accountService, AuthenticationManager authenticationManager, AppUserRepository appUserRepository
+    ) {
         this.accountService = accountService;
         this.authenticationManager = authenticationManager;
         this.appUserRepository = appUserRepository;
+
     }
 
 
@@ -107,12 +113,11 @@ public class UserController {
         user.setPrenom(updatedUser.getPrenom());
         user.setUserName(updatedUser.getUserName());
         user.setEmail(updatedUser.getEmail());
-        user.setPassword(updatedUser.getPassword());
+       /* user.setPassword(updatedUser.getPassword());*/
 
         AppUser updatedAppUser = accountService.updateUser(user);
         return ResponseEntity.ok(updatedAppUser);
     }
-
 
 
 
@@ -147,3 +152,4 @@ class RoleForm{
 
 
 }
+
